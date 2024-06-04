@@ -1,9 +1,9 @@
 <?php
-require_once 'models/Category.php';
-require_once 'models/Product.php';
-require_once 'models/Food.php';
-require_once 'models/Toy.php';
-require_once 'models/Bed.php';
+require_once './models/category.php';
+require_once './models/product.php';
+require_once './models/food.php';
+require_once './models/toy.php';
+require_once './models/bed.php';
 
 // Creazione di una categoria di esempio
 $categoryDog = new Category("Dog", "🐶");
