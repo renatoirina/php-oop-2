@@ -4,22 +4,34 @@ require_once './models/product.php';
 require_once './models/food.php';
 require_once './models/toy.php';
 require_once './models/bed.php';
+require_once './trait/loggable.php'; // Includi il trait
+require_once './exception/InvalidPriceException.php'; // Includi l'eccezione
 
-// Creazione di una categoria di esempio
-$categoryDog = new Category("Dog", "🐶");
-$categoryCat = new Category("Cat", "🐱");
+try {
+    // Creazione di una categoria di esempio
+    $categoryDog = new Category("Dog", "🐶");
+    $categoryCat = new Category("Cat", "🐱");
 
-// Creazione di prodotti di esempio
-$products = [
-    new Food("Dog Food", 19.99, "./img/dogFood1.jpg", $categoryDog, "2024-12-31"),
-    new Toy("Cat Toy", 9.99, "./img/catToy1.jpeg", $categoryCat, "Plastic"),
-    new Bed("Dog Bed", 49.99, "./img/dogBed1.jpeg", $categoryDog, "Large", "Cotton")
-];
+    // Creazione di prodotti di esempio
+    $products = [
+        new Food("Dog Food", 19.99, "./img/dogFood1.jpg", $categoryDog, "2024-12-31"),
+        new Toy("Cat Toy", 9.99, "./img/catToy1.jpeg", $categoryCat, "Plastic"),
+        new Bed("Dog Bed", 49.99, "./img/dogBed1.jpeg", $categoryDog, "Large", "Cotton")
+    ];
+
+    // Log dei dettagli dei prodotti
+    foreach ($products as $product) {
+        $product->logDetails();
+        echo "<br>";
+    }
+
+} catch (InvalidPriceException $e) {
+    echo "Errore: " . $e->getMessage();
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,7 +40,6 @@ $products = [
     <!-- BOOTSTRAP -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
-
 <body>
     <div class="container mt-5">
         <div class="row">
@@ -63,5 +74,4 @@ $products = [
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
-
 </html>
